@@ -1,0 +1,23 @@
+{
+  "name": "text-autocomplete",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "문장 자동 완성 확장 프로그램",
+  "homepage_url": "https://github.com/kangjung/text-autocomplete",
+  "background": {
+    "scripts": [ "background.js" ]
+  },
+  "browser_action": {
+    "default_title": "text-autocomplete"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "browsingData"
+
+  ]
+  "icons": { "16": "image/icon.png", "128": "image/icon.png" }
+}
