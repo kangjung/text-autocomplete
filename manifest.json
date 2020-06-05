@@ -5,19 +5,31 @@
   "description": "문장 자동 완성 확장 프로그램",
   "homepage_url": "https://github.com/kangjung/text-autocomplete",
   "background": {
-    "scripts": [ "background.js" ]
+    "scripts": [ "background.js" ],
+    "persistent": true
   },
   "browser_action": {
-    "default_title": "text-autocomplete"
+    "default_title": "text-autocomplete",
+    "default_popup" : "popup.html"
   },
   "permissions": [
     "https://*/*",
     "http://*/*",
     "tabs",
+    "storage",
+    "unlimitedStorage",
+    "background",
     "webRequest",
-    "webRequestBlocking",
-    "browsingData"
+    "webRequestBlocking"
 
   ],
+  "commands": {
+  "selectedText" : {
+    "suggested_key": {
+      "default": "Ctrl+Space"
+    },
+    "description": "Save a link"
+  }
+  },
   "icons": { "16": "image/icon.png", "128": "image/icon.png" }
 }

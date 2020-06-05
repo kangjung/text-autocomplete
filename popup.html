@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xml:lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+    </style>
+    <script src="script.js"></script>
 </head>
 <body>
+    <div>
+        <input id="abbreviation_text" name="abbreviation_text" type="text" maxlength="10" size="20" />
+        <input id="full_text" name="full_text" type="text" value="" maxlength="1000" size="100" />
+        <input type="button" id="saveBtn" value="save" />
+    </div>
+    <table>
+        <thead>
+        <th>
+            약어
+        </th>
+        <th>
+            문장
+        </th>
+        </thead>
+        <tbody id="textBody">
+
+        </tbody>
+    </table>
+
 
 </body>
 </html>
