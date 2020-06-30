@@ -1,9 +1,13 @@
 var funcToInject = function() {
 
-    var selection,before,after,input_text
+    var selection,before,after,input_text;
     const activeTextarea = document.activeElement;
+    if(activeTextarea){
+
+    }
     var start = activeTextarea.selectionStart;
     var end = activeTextarea.selectionEnd;
+
     if( activeTextarea.tagName == "IFRAME" ){
         var iframedoc = activeTextarea.document;
         if (activeTextarea.contentDocument) {
@@ -21,18 +25,16 @@ var funcToInject = function() {
                             alert("없는 약어입니다.");
                             return;
                         }
-                        iframedoc.body.innerHTML = iframedoc.body.innerHTML.replace(iframedoc.getSelection().toString(),items[iframedoc.getSelection().toString()]);
-                        /*
-                        iframedoc.contents().text($(this).text().replace('Password','Name:'));*/
-                        // iframedoc.writeln(items[iframedoc.getSelection().toString()]);
-/*                        var sText = iframedoc.selection.createRange();
-                        sText = iframedoc.getSelection();
-                        myTag = textEditor.document.createElement("div");
-                        myTag.setAttribute("text", items[iframedoc.getSelection().toString()]);
-                        sText.getRangeAt(0).surroundContents(myTag);*/
 
-                        iframedoc.close();
+                        var text = items[iframedoc.getSelection().toString()];
+                        let newNode = document.createElement('u');
+                        newNode.innerHTML = items[iframedoc.getSelection().toString()];
 
+                        let oldText = iframedoc.getSelection().focusNode.textContent;
+                        before = oldText.slice(0, iframedoc.getSelection().anchorOffset);
+                        after = oldText.slice(iframedoc.getSelection().focusOffset);
+
+                        alert(before+text+after);
                     });
                 }
             } else if (iframedoc.selection) {
@@ -42,14 +44,6 @@ var funcToInject = function() {
                         return;
                     }
                     var text = items[iframedoc.selection.createRange().text];
-
-                    var sText=iframedoc.selection.createRange();
-                    sText.innerText = text;
-                    var temp=sText.parentElement().innerHTML;
-                    var newNode=iframedoc.createElement("h1");
-                    var replacement=sText.parentElement().replaceNode(newNode);
-                    newNode.innerHTML=temp;
-
                 });
             }
 
@@ -63,7 +57,7 @@ var funcToInject = function() {
         //     selection.removeAllRanges();
         //     selection.addRange(range);
         // }
-    } else if( activeTextarea.tagName == "INPUT" ){
+    } else if( activeTextarea.tagName == "INPUT" ||  activeTextarea.tagName == "TEXTAREA" ){
         input_text = activeTextarea.value;
         selection = input_text.slice(start, end);
         before = input_text.slice(0, start);
@@ -78,7 +72,6 @@ var funcToInject = function() {
             document.activeElement.value = before+text+after;
         });
     }
-
 };
 function getAncestorWithTagName(node, tagName) {
     tagName = tagName.toUpperCase();
@@ -94,6 +87,7 @@ function getAncestorWithTagName(node, tagName) {
 
 chrome.commands.onCommand.addListener(function(cmd) {
     if (cmd === 'selectedText') {
+
         chrome.tabs.executeScript({
             code: ';(' + funcToInject + ')();',
             allFrames: true

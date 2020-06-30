@@ -5,29 +5,71 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <style>
+        table {
+            border-collapse: collapse;
+            text-align: left;
+            line-height: 1.5;
+        }
+        table thead th {
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            color: #369;
+            border-bottom: 3px solid #036;
+        }
+        .shot{
+            width: 50px;
+        }
+        .long{
+            width: 150px;
+        }
+        table tbody th {
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            background: #f3f6f7;
+        }
+        table td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
     </style>
     <script src="script.js"></script>
 </head>
 <body>
     <div>
-        <input id="abbreviation_text" name="abbreviation_text" type="text" maxlength="10" size="20" />
-        <input id="full_text" name="full_text" type="text" value="" maxlength="1000" size="100" />
-        <input type="button" id="saveBtn" value="save" />
+
+        <table>
+            <thead><tr><th class="shot">약어</th><th class="long">문장</th><th>실행</th></tr></thead>
+            <tbody>
+            <tr>
+            <td><input id="abbreviation_text" name="abbreviation_text" type="text" maxlength="10" size="20" title="입력약어" /></td>
+            <td><input id="full_text" name="full_text" type="text" value="" maxlength="500" size="50" title="입력문장" /></td>
+            <td><input type="button" id="saveBtn" value="save" title="저장버튼"/></td></tr>
+            </tbody>
+        </table>
+
     </div>
     <table>
-        <thead>
-        <th>
+        <thead><tr>
+        <th class="shot">
             약어
         </th>
-        <th>
+        <th class="long">
             문장
         </th>
+        <th>
+            실행
+        </th></tr>
         </thead>
         <tbody id="textBody">
 
         </tbody>
     </table>
-
+    <input type='button' id='removeBtn' value='delete' />
 
 </body>
 </html>
