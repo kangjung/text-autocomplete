@@ -17,24 +17,19 @@ var funcToInject = function() {
         }
         if (iframedoc) {
             if (iframedoc.getSelection) {
-                // alert(iframedoc.getSelection().toString());
-                if(iframedoc.getSelection().toString() != "") {
+                if(iframedoc.getSelection() != "") {
                     chrome.storage.local.get(iframedoc.getSelection().toString(), function (items) {
                         alert("text items " + items[iframedoc.getSelection().toString()]);
                         if (!items[iframedoc.getSelection().toString()]) {
                             alert("없는 약어입니다.");
                             return;
                         }
-
-                        var text = items[iframedoc.getSelection().toString()];
-                        let newNode = document.createElement('u');
-                        newNode.innerHTML = items[iframedoc.getSelection().toString()];
-
-                        let oldText = iframedoc.getSelection().focusNode.textContent;
-                        before = oldText.slice(0, iframedoc.getSelection().anchorOffset);
-                        after = oldText.slice(iframedoc.getSelection().focusOffset);
-
-                        alert(before+text+after);
+                        let oldText = iframedoc.getSelection().focusNode.parentElement.innerText;
+                        start =iframedoc.getSelection().anchorOffset;
+                        end = iframedoc.getSelection().focusOffset;
+                        before = oldText.slice(0, start > end ? end : start);
+                        after = oldText.slice(start < end ? end : start);
+                        iframedoc.getSelection().focusNode.parentElement.innerText = before+items[iframedoc.getSelection().toString()]+after;
                     });
                 }
             } else if (iframedoc.selection) {
@@ -43,20 +38,17 @@ var funcToInject = function() {
                         alert("없는 약어입니다.");
                         return;
                     }
-                    var text = items[iframedoc.selection.createRange().text];
+                    let oldText = iframedoc.selection.createRange().focusNode.parentElement.innerText;
+                    start =iframedoc.getSelection().anchorOffset;
+                    end = iframedoc.getSelection().focusOffset;
+                    before = oldText.slice(0, start > end ? end : start);
+                    after = oldText.slice(start < end ? end : start);
+                    iframedoc.selection.createRange().parentElement.innerText = before+items[iframedoc.selection.createRange().text]+after;
+                    iframedoc.onfocus
                 });
             }
-
+            iframedoc.close();
         }
-        // if ( iframedoc ) {
-        //
-        //     var range = iframedoc.createRange();
-        //     range.setStart(iframedoc.body.firstChild, start);
-        //     range.setEnd(iframedoc.body.firstChild, end);
-        //     var selection = iframedoc.getSelection();
-        //     selection.removeAllRanges();
-        //     selection.addRange(range);
-        // }
     } else if( activeTextarea.tagName == "INPUT" ||  activeTextarea.tagName == "TEXTAREA" ){
         input_text = activeTextarea.value;
         selection = input_text.slice(start, end);
@@ -73,17 +65,6 @@ var funcToInject = function() {
         });
     }
 };
-function getAncestorWithTagName(node, tagName) {
-    tagName = tagName.toUpperCase();
-    while (node) {
-        if (node.nodeType == 1 && node.tagName.toUpperCase() == tagName) {
-            return node;
-        }
-        node = node.parentNode;
-    }
-    return null;
-}
-
 
 chrome.commands.onCommand.addListener(function(cmd) {
     if (cmd === 'selectedText') {
