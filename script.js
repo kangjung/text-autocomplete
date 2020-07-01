@@ -21,13 +21,11 @@ function remove() {
     var size = document.getElementsByName("checkKey").length;
 
     for(var i = 0; i < size; i++) {
-        alert(document.getElementsByName("checkKey")[i].value);
         if(document.getElementsByName("checkKey")[i].checked) {
             key  = document.getElementsByName("checkKey")[i].value ;
             break;
         }
     }
-    alert("KEY  " + key);
     if(key) {
         chrome.storage.local.remove(key);
         show();
