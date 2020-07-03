@@ -63,6 +63,15 @@ var funcToInject = function() {
             var text = items[selection.toString()];
             document.activeElement.value = before+text+after;
         });
+    } else {
+
+        var sel = document.getSelection();
+        chrome.storage.local.get(sel.toString(), function (items) {
+            if(!items[sel.toString()]){
+                alert("없는 약어입니다.");
+                return;
+            }
+        });
     }
 };
 
