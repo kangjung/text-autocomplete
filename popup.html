@@ -7,7 +7,7 @@
     <style>
         table {
             border-collapse: collapse;
-            text-align: left;
+            /*text-align: left;*/
             line-height: 1.5;
         }
         table thead th {
@@ -31,7 +31,6 @@
             background: #f3f6f7;
         }
         table td {
-            width: 350px;
             padding: 10px;
             vertical-align: top;
             border-bottom: 1px solid #ccc;
@@ -47,7 +46,7 @@
             <tbody>
             <tr>
             <td><input id="abbreviation_text" name="abbreviation_text" type="text" maxlength="10" size="20" title="입력약어" /></td>
-            <td><input id="full_text" name="full_text" type="text" value="" maxlength="500" size="50" title="입력문장" /></td>
+            <td class = 'shot'><input id="full_text" name="full_text" type="text" value="" maxlength="500" size="50" title="입력문장" /></td>
             <td><input type="button" id="saveBtn" value="save" title="저장버튼"/></td></tr>
             </tbody>
         </table>
