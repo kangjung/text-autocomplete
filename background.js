@@ -54,7 +54,6 @@ var funcToInject = function() {
                 }
                 iframedoc.close();
             } else if (iframedoc.selection) {
-                alert(iframedoc.selection);
                 chrome.storage.local.get(iframedoc.selection.createRange().text, function (items) {
                     if(!items[iframedoc.selection.createRange().text]){
                         alert("없는 약어입니다.");
@@ -102,6 +101,49 @@ var funcToInject = function() {
             document.activeElement.value = before+text+after;
 
             return tagName;
+        });
+    } else {
+        if (window.getSelection) {
+            selection = window.getSelection();
+        } else if (document.getSelection) {
+            selection = document.getSelection();
+        } else if (document.selection) {
+            selection = document.selection.createRange().text;
+        }
+        var range = selection.getRangeAt(0);
+
+        var innerText = range.commonAncestorContainer.textContent;
+        start =selection.anchorOffset;
+        end = selection.focusOffset;
+
+        if(start == end){
+            var j=0;
+            do {
+                start--;
+                if(innerText.slice(start, end-j) == " "){
+                    start++;
+                    alert(innerText.slice(start,end));
+                    selection = innerText.slice(start,end);
+                    break;
+                } else if(start == 0){
+                    selection = innerText.slice(start,end);
+                    break;
+                }
+                j++;
+            } while (start > 0);
+        }
+
+        chrome.storage.local.get(selection.toString(), function (items) {
+            if(!items[selection.toString()]){
+                alert("없는 약어입니다.");
+                return tagName;
+            }
+
+            before = innerText.slice(0, start > end ? end : start);
+            console.log(start < end ? end : start);
+            after = innerText.slice(start < end ? end : start);
+            console.log(before+items[selection]+after);
+            range.commonAncestorContainer.textContent = before+items[selection]+after;
         });
     }
 };
