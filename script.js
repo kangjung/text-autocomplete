@@ -1,10 +1,14 @@
 function save () {
     var key = document.getElementById("abbreviation_text").value;
     var text = document.getElementById("full_text").value;
-
+    if (key.match(/\s/g)) {
+        alert("약어에 공백이 들어갈수 없습니다.");
+        document.getElementById("abbreviation_text").focus();
+        return;
+    }
     chrome.storage.local.get(key, function(val) {
         if(val[key]){
-            if(confirm("저장된 약어가 있습니다. 덮어쓰시겠습니까?")){
+            if(confirm("해당 약어로 저장된 정보가 있습니다. 덮어쓰시겠습니까?")){
                 val[key] = text;
                 chrome.storage.local.remove(key);
                 chrome.storage.local.set(val);
