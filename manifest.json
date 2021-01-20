@@ -28,7 +28,7 @@
     "suggested_key": {
       "default": "Ctrl+Space"
     },
-    "description": "Save a link"
+    "description": "text change"
   }
   },
   "icons": { "16": "image/icon.png", "128": "image/icon.png" }
