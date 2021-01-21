@@ -5,7 +5,16 @@ function save () {
         alert("약어에 공백이 들어갈수 없습니다.");
         document.getElementById("abbreviation_text").focus();
         return;
+    } else if(key == ""){
+        alert("약어를 입력해 주세요.");
+        document.getElementById("abbreviation_text").focus();
+        return;
+    } else if(text == ""){
+        alert("문자를 입력해 주세요.");
+        document.getElementById("full_text").focus();
+        return;
     }
+
     chrome.storage.local.get(key, function(val) {
         if(val[key]){
             if(confirm("해당 약어로 저장된 정보가 있습니다. 덮어쓰시겠습니까?")){

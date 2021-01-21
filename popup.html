@@ -8,15 +8,19 @@
         table {border-collapse: collapse; width: 100%; /*text-align: left;*/ line-height: 1.5; }
         table thead th { padding: 10px; font-weight: bold; vertical-align: top;  }
         table tbody th { padding: 10px; font-weight: bold; vertical-align: top; border-bottom: 1px solid #ccc; background: #f3f6f7; }
-        table td { padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc; }
-        .topArea table thead th {color: white;border-bottom: 3px solid white;}
-        .resultArea thead th{color: #369;border-bottom: 3px solid #036;}
-        header {position: fixed;top: 0;left: 0;right: 0;background-color: rgb(51, 103, 214);height: 75px;padding: 1rem;color: white;font-weight: bold;display: flex;align-items: center;}
-        .btnArea { width: 100%; height: 10%; position:fixed;bottom: 0;left: 0;right: 0;text-align: center;color: aqua;background-color: #336699 }
-        .btnArea .btn { padding:10px 20px;}
-        body {min-width: 700px;padding-top: 85px;}
+        table td { padding: 10px; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.3); }
+        .topArea table thead th {color: white;border-bottom: 1px solid white;}
+        .resultArea thead th{color: #369;border-bottom: 1px solid #036; border-color: #cccccc}
+        header {position: fixed;top: 0;left: 0;right: 0;background-color: rgb(51, 103, 214);height: 75px;padding: 1rem;color: white;font-weight: bold; display: flex; align-items: center;}
+        .btnArea {height: 60px;padding: 15px 10px 0 0; position:fixed;bottom: 0;left: 0;right: 0;text-align: right;color: aqua; background-color: #f9f9f9;}
+        .btnArea .btn { padding:10px 20px; border: 1px solid rgb(218,220,224); border-radius: 4px;font-weight: 500;color: rgb(26,115,232); cursor:pointer; background-color: #f9f9f9;}
+        .btnArea .btn:hover, .btnArea .btn:focus{background-color: rgba(66, 133, 244, 0.04);}
+        body {min-width: 700px;padding-top: 85px; padding-bottom: 75px}
         main {padding: 1rem;height: 100%;}
-    </style>
+        input[type=text]{background-color:rgba(0, 0, 0, 0.22);border: none;height: 30px;color: white}
+        #saveBtn{background-color:rgba(0, 0, 0, 0.22);color: white;height: 30px;border: 1px solid rgba(0, 0, 0, 0.35);cursor:pointer;}
+        #saveBtn:hover, #saveBtn:focus{background-color:rgba(0, 0, 0, 0.44);}
+</style>
     <script src="script.js"></script>
 </head>
 <body>
